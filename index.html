@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pride Sneaker CRM</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Pride Sneaker CRM</h1>
+      <p>Track customers, services, and sneaker wash jobs.</p>
+    </header>
+
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab-btn active" data-tab="customers">Customers</button>
+      <button class="tab-btn" data-tab="services">Services</button>
+      <button class="tab-btn" data-tab="jobs">Sneaker Wash Jobs</button>
+    </nav>
+
+    <main>
+      <section id="customers" class="tab-panel active">
+        <h2>Customers</h2>
+        <form id="customer-form" class="card form-grid">
+          <label>
+            Name
+            <input id="customer-name" type="text" required />
+          </label>
+          <label>
+            Phone
+            <input id="customer-phone" type="tel" required />
+          </label>
+          <button type="submit">Add Customer</button>
+        </form>
+
+        <div class="card">
+          <h3>Customer Database</h3>
+          <ul id="customer-list" class="list"></ul>
+        </div>
+      </section>
+
+      <section id="services" class="tab-panel">
+        <h2>In-House Services</h2>
+        <form id="service-form" class="card form-grid">
+          <label>
+            Service Name
+            <input id="service-name" type="text" required />
+          </label>
+          <label>
+            Price ($)
+            <input id="service-price" type="number" min="0" step="0.01" required />
+          </label>
+          <button type="submit">Add Service</button>
+        </form>
+
+        <div class="card">
+          <h3>Service Catalog</h3>
+          <ul id="service-list" class="list"></ul>
+        </div>
+      </section>
+
+      <section id="jobs" class="tab-panel">
+        <h2>Sneaker Wash Jobs</h2>
+        <form id="job-form" class="card form-grid">
+          <label>
+            Customer
+            <select id="job-customer" required></select>
+          </label>
+
+          <fieldset class="fieldset">
+            <legend>Sneakers in this job</legend>
+            <div id="sneaker-container"></div>
+            <button type="button" id="add-sneaker">+ Add Sneaker</button>
+          </fieldset>
+
+          <button type="submit">Create Job</button>
+        </form>
+
+        <div class="card">
+          <h3>Jobs</h3>
+          <ul id="job-list" class="list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <template id="sneaker-template">
+      <article class="sneaker-item">
+        <label>
+          Sneaker Name
+          <input class="sneaker-name" type="text" required />
+        </label>
+
+        <label>
+          Service
+          <select class="sneaker-service" required></select>
+        </label>
+
+        <label>
+          Sneaker Images (max 4)
+          <input class="sneaker-images" type="file" accept="image/*" multiple />
+        </label>
+
+        <small class="hint">Upload up to 4 pictures per sneaker.</small>
+        <div class="preview-grid"></div>
+
+        <button type="button" class="remove-sneaker">Remove Sneaker</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
