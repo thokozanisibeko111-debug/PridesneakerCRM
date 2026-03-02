@@ -1,3 +1,4 @@
+/* ── Reset & root ── */
 :root {
   font-family: Inter, system-ui, Arial, sans-serif;
   color-scheme: light;
@@ -9,10 +10,21 @@ body {
   background: #f6f7fb;
 }
 
+/* ── Header ── */
 header {
   background: #111827;
   color: #fff;
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 header h1,
@@ -20,11 +32,70 @@ header p {
   margin: 0;
 }
 
-header p {
-  opacity: 0.8;
-  margin-top: 0.4rem;
+header h1 {
+  font-size: 1.4rem;
 }
 
+header p {
+  opacity: 0.75;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.header-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.stat-badge {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.stat-badge.accent {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* ── Toast notifications ── */
+#toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: grid;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  background: #1f2937;
+  color: #fff;
+  padding: 0.65rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.toast.toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.toast-error {
+  background: #dc2626;
+}
+
+/* ── Tab bar ── */
 .tabs {
   display: flex;
   gap: 0.5rem;
@@ -39,6 +110,12 @@ header p {
   background: #fff;
   border-radius: 0.4rem;
   cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab-btn:hover {
+  background: #f1f5f9;
 }
 
 .tab-btn.active {
@@ -47,10 +124,11 @@ header p {
   color: #fff;
 }
 
+/* ── Main layout ── */
 main {
   max-width: 1000px;
   margin: 1rem auto;
-  padding: 0 1rem 2rem;
+  padding: 0 1rem 3rem;
 }
 
 .tab-panel {
@@ -61,6 +139,7 @@ main {
   display: block;
 }
 
+/* ── Card ── */
 .card {
   background: #fff;
   border: 1px solid #e2e8f0;
@@ -74,6 +153,30 @@ main {
   gap: 0.75rem;
 }
 
+/* ── List header (title + search/filter inline) ── */
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.list-header h3 {
+  margin: 0;
+}
+
+.search-input {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  font: inherit;
+  font-size: 0.9rem;
+  width: 200px;
+}
+
+/* ── Labels & form elements ── */
 label {
   display: grid;
   gap: 0.35rem;
@@ -93,6 +196,12 @@ select {
   padding: 0.5rem;
 }
 
+input:focus,
+select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
 button {
   width: fit-content;
   border: none;
@@ -101,8 +210,15 @@ button {
   color: #fff;
   padding: 0.55rem 0.85rem;
   cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.15s;
 }
 
+button:hover {
+  opacity: 0.88;
+}
+
+/* ── Lists ── */
 .list {
   list-style: none;
   margin: 0;
@@ -122,16 +238,44 @@ button {
   flex-wrap: wrap;
 }
 
+/* Job items stack vertically */
+.list-item-col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── Danger button ── */
 .danger {
   background: #dc2626;
 }
 
+/* ── Customer job-count badge ── */
+.job-count-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  list-style: none;
+  text-align: center;
+  color: #9ca3af;
+  padding: 1.5rem;
+  font-style: italic;
+}
+
+/* ── Fieldset (sneakers in job form) ── */
 .fieldset {
   border: 1px solid #cbd5e1;
   border-radius: 0.5rem;
   padding: 1rem;
 }
 
+/* ── Individual sneaker card in the form ── */
 .sneaker-item {
   border: 1px solid #dbe2ee;
   border-radius: 0.5rem;
@@ -139,12 +283,14 @@ button {
   margin-bottom: 0.75rem;
   display: grid;
   gap: 0.65rem;
+  background: #f9fafb;
 }
 
 .hint {
   color: #64748b;
 }
 
+/* ── Image preview grid ── */
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -159,7 +305,78 @@ button {
   border: 1px solid #cbd5e1;
 }
 
+/* ── Job list item internals ── */
+.job-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.job-sneakers {
+  margin-top: 0.25rem;
+}
+
 .job-sneaker {
-  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: #374151;
+  padding: 0.2rem 0;
+}
+
+.photo-note {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.job-total {
+  font-weight: 700;
   font-size: 0.95rem;
+  color: #1d4ed8;
+  margin-top: 0.35rem;
+}
+
+.job-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.status-select {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.4rem 0.5rem;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+/* ── Status badges (read-only pill on job card) ── */
+.status-badge {
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-pending {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.status-in-progress {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-done {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-collected {
+  background: #f3f4f6;
+  color: #4b5563;
 }
