@@ -3,62 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pride Sneaker CRM</title>
+    <title>Pride Sneaker Wash — CRM</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header>
-      <h1>Pride Sneaker CRM</h1>
-      <p>Track customers, services, and sneaker wash jobs.</p>
+      <div class="header-inner">
+        <div>
+          <h1>Pride Sneaker Wash</h1>
+          <p>Customer &amp; Job Management &mdash; South Africa</p>
+        </div>
+        <div class="header-stats">
+          <span class="stat-badge" id="stat-customers">0 Customers</span>
+          <span class="stat-badge" id="stat-jobs">0 Jobs</span>
+          <span class="stat-badge accent" id="stat-active">0 Active</span>
+        </div>
+      </div>
     </header>
+
+    <div id="toast-container" aria-live="polite"></div>
 
     <nav class="tabs" aria-label="Sections">
       <button class="tab-btn active" data-tab="customers">Customers</button>
       <button class="tab-btn" data-tab="services">Services</button>
-      <button class="tab-btn" data-tab="jobs">Sneaker Wash Jobs</button>
+      <button class="tab-btn" data-tab="jobs">Wash Jobs</button>
     </nav>
 
     <main>
+      <!-- ── CUSTOMERS ── -->
       <section id="customers" class="tab-panel active">
         <h2>Customers</h2>
         <form id="customer-form" class="card form-grid">
           <label>
-            Name
-            <input id="customer-name" type="text" required />
+            Full Name
+            <input id="customer-name" type="text" placeholder="e.g. Thabo Nkosi" required />
           </label>
           <label>
-            Phone
-            <input id="customer-phone" type="tel" required />
+            Phone Number
+            <input id="customer-phone" type="tel" placeholder="e.g. 082 123 4567" required />
           </label>
           <button type="submit">Add Customer</button>
         </form>
 
         <div class="card">
-          <h3>Customer Database</h3>
+          <div class="list-header">
+            <h3>Customer Database</h3>
+            <input id="customer-search" type="search" placeholder="Search customers…" class="search-input" />
+          </div>
           <ul id="customer-list" class="list"></ul>
         </div>
       </section>
 
+      <!-- ── SERVICES ── -->
       <section id="services" class="tab-panel">
         <h2>In-House Services</h2>
         <form id="service-form" class="card form-grid">
           <label>
             Service Name
-            <input id="service-name" type="text" required />
+            <input id="service-name" type="text" placeholder="e.g. Premium Restoration" required />
           </label>
           <label>
-            Price ($)
-            <input id="service-price" type="number" min="0" step="0.01" required />
+            Price (R)
+            <input id="service-price" type="number" min="0" step="0.01" placeholder="e.g. 180" required />
           </label>
           <button type="submit">Add Service</button>
         </form>
 
         <div class="card">
-          <h3>Service Catalog</h3>
+          <h3>Service Catalogue</h3>
           <ul id="service-list" class="list"></ul>
         </div>
       </section>
 
+      <!-- ── JOBS ── -->
       <section id="jobs" class="tab-panel">
         <h2>Sneaker Wash Jobs</h2>
         <form id="job-form" class="card form-grid">
@@ -77,7 +94,16 @@
         </form>
 
         <div class="card">
-          <h3>Jobs</h3>
+          <div class="list-header">
+            <h3>Jobs</h3>
+            <select id="job-status-filter" class="status-select">
+              <option value="">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+              <option value="collected">Collected</option>
+            </select>
+          </div>
           <ul id="job-list" class="list"></ul>
         </div>
       </section>
@@ -86,8 +112,8 @@
     <template id="sneaker-template">
       <article class="sneaker-item">
         <label>
-          Sneaker Name
-          <input class="sneaker-name" type="text" required />
+          Sneaker Name / Description
+          <input class="sneaker-name" type="text" placeholder="e.g. Nike Air Force 1 White" required />
         </label>
 
         <label>
@@ -100,10 +126,10 @@
           <input class="sneaker-images" type="file" accept="image/*" multiple />
         </label>
 
-        <small class="hint">Upload up to 4 pictures per sneaker.</small>
+        <small class="hint">Upload up to 4 photos per sneaker (before/after, damage, etc.).</small>
         <div class="preview-grid"></div>
 
-        <button type="button" class="remove-sneaker">Remove Sneaker</button>
+        <button type="button" class="remove-sneaker danger">Remove Sneaker</button>
       </article>
     </template>
 
